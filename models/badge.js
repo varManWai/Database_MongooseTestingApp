@@ -21,6 +21,10 @@ const badgeSchema = new Schema({
     type: String,
     required: true,
   },
+  studentID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Student'
+}
 });
 
 const Badge = models.Badge || model("Badge", badgeSchema);
