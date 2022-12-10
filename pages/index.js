@@ -13,10 +13,11 @@ export default function Home({ Students }) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const createStudent = async () => {
     const randomNum = Math.floor(Math.random() * 1000);
-    const res = await fetch("/api/test/add", {
+    const res = await fetch("/api/student/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,12 +25,13 @@ export default function Home({ Students }) {
       body: JSON.stringify({
         name: name,
         email: email,
+        password: password,
       }),
     });
     const data = await res.json();
     console.log(data);
 
-    router.push("/");
+    // router.push("/");
   };
   return (
     <div className={styles.container}>
@@ -42,10 +44,18 @@ export default function Home({ Students }) {
       <main className={styles.main}>
 
         <form onSubmit={createStudent}>
-          <label>Name :</label>
-          <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
-          <label>Email :</label>
-          <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
+          <div>
+            <label>Name :</label>
+            <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
+          </div>
+          <div>
+            <label>Email :</label>
+            <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
+          </div>
+          <div>
+            <label>Password :</label>
+            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+          </div>
           <button type="submit">Submit</button>
         </form>
 
@@ -62,6 +72,7 @@ export default function Home({ Students }) {
               >
                 <h2>{Student.name} &rarr;</h2>
                 <p>{Student.email}</p>
+                <p>{Student.password}</p>
               </Link>
             ))}
           </div>
