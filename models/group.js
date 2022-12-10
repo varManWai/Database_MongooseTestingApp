@@ -11,6 +11,6 @@ const groupSchema = new Schema({
   },
 });
 
-const Student = models.Student || model("Student", groupSchema);
+const Group = models.Group || model("Group", groupSchema);
 
-export default Student;
+export default Group;
