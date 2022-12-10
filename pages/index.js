@@ -3,13 +3,17 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 import connectMongo from "../utils/connectMongo";
-import Test from "../models/testModel";
+import Student from "../models/student";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
-export default function Home({tests}) {
+export default function Home({ Students }) {
   const router = useRouter();
 
-  const createTest = async () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const createStudent = async () => {
     const randomNum = Math.floor(Math.random() * 1000);
     const res = await fetch("/api/test/add", {
       method: "POST",
@@ -17,14 +21,14 @@ export default function Home({tests}) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: `Test ${randomNum}`,
-        email: `test${randomNum}@test.com`,
+        name: name,
+        email: email,
       }),
     });
     const data = await res.json();
     console.log(data);
 
-    router.push('/');
+    router.push("/");
   };
   return (
     <div className={styles.container}>
@@ -35,44 +39,35 @@ export default function Home({tests}) {
       </Head>
 
       <main className={styles.main}>
-        <button onClick={createTest}>Create Test</button>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <form onSubmit={createStudent}>
+          <label>Name :</label>
+          <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
+          <label>Email :</label>
+          <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
+          <button type="submit">Submit</button>
+        </form>
+
+        <button onClick={createStudent}>Create Student</button>
+
 
         <div className={styles.grid}>
           <div className={styles.grid}>
-            {tests.map((test) => (
+            {Students.map((Student) => (
               <a
                 href="https://nextjs.org/docs"
-                key={test._id}
+                key={Student._id}
                 className={styles.card}
               >
-                <h2>{test.name} &rarr;</h2>
-                <p>{test.email}</p>
+                <h2>{Student.name} &rarr;</h2>
+                <p>{Student.email}</p>
               </a>
             ))}
           </div>
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+
     </div>
   );
 }
@@ -84,12 +79,12 @@ export const getServerSideProps = async () => {
     console.log("CONNECTED TO MONGO");
 
     console.log("FETCHING DOCUMENTS");
-    const tests = await Test.find();
+    const Students = await Student.find();
     console.log("FETCHED DOCUMENTS");
 
     return {
       props: {
-        tests: JSON.parse(JSON.stringify(tests)),
+        Students: JSON.parse(JSON.stringify(Students)),
       },
     };
   } catch (error) {
