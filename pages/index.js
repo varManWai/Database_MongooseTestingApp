@@ -6,6 +6,7 @@ import connectMongo from "../utils/connectMongo";
 import Student from "../models/student";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home({ Students }) {
   const router = useRouter();
@@ -54,14 +55,14 @@ export default function Home({ Students }) {
         <div className={styles.grid}>
           <div className={styles.grid}>
             {Students.map((Student) => (
-              <a
-                href="https://nextjs.org/docs"
+              <Link
+                href={`/students/${Student._id}`}
                 key={Student._id}
                 className={styles.card}
               >
                 <h2>{Student.name} &rarr;</h2>
                 <p>{Student.email}</p>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
