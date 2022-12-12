@@ -2,11 +2,11 @@ import { Schema, model, models } from "mongoose";
 
 const certificateEducatorSchema = new Schema({
   certificateID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Certificate",
   },
   educatorID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Educator",
   },
 });

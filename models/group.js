@@ -10,7 +10,7 @@ const groupSchema = new Schema({
     required: true,
   },
   educatorID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Educator'
 }
 });
