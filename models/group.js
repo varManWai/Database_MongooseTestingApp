@@ -11,7 +11,8 @@ const groupSchema = new Schema({
   },
   educatorID: {
     type: Schema.Types.ObjectId,
-    ref: 'Educator'
+    ref: 'Educator',
+    required: true,
 }
 });
 

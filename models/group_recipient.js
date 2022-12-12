@@ -4,10 +4,12 @@ const groupRecipientSchema = new Schema({
   recipientID: {
     type: Schema.Types.ObjectId,
     ref: "Recipient",
+    required: true,
   },
   groupID: {
     type: Schema.Types.ObjectId,
     ref: "Group",
+    required: true,
   },
 });
 

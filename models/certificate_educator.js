@@ -4,10 +4,12 @@ const certificateEducatorSchema = new Schema({
   certificateID: {
     type: Schema.Types.ObjectId,
     ref: "Certificate",
+    required: true,
   },
   educatorID: {
     type: Schema.Types.ObjectId,
     ref: "Educator",
+    required: true,
   },
 });
 

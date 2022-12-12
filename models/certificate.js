@@ -23,7 +23,8 @@ const certificateSchema = new Schema({
   },
   studentID: {
     type: Schema.Types.ObjectId,
-    ref: 'Student'
+    ref: 'Student',
+    required: true,
 }
 });
 

@@ -4,10 +4,12 @@ const badgeEducatorSchema = new Schema({
   badgeID: {
     type: Schema.Types.ObjectId,
     ref: "Badge",
+    required: true,
   },
   educatorID: {
     type: Schema.Types.ObjectId,
     ref: "Educator",
+    required: true,
   },
 });
 

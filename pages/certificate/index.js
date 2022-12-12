@@ -7,6 +7,7 @@ import Certificate from "../../models/certificate";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
+import { Types } from "mongoose";
 
 export default function AddCertificate({ Certificates }) {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function AddCertificate({ Certificates }) {
         desc: desc,
         dateIssued: dataIssued,
         address: address,
-        student: "6394d3ddcef135c5f57771d2",
+        student: Types.ObjectId("6394d3ddcef135c5f57771d2"),
       }),
     });
     const data = await res.json();
