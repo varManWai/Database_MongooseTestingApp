@@ -17,7 +17,9 @@ export default function AddCertificate({ Certificates }) {
   const [dataIssued, setDateIssued] = useState("");
   const [address, setAddress] = useState("");
 
-  const createCertificate = async () => {
+  const createCertificate = async (event) => {
+    event.preventDefault();
+
     const res = await fetch("/api/certificate/add", {
       method: "POST",
       headers: {
@@ -35,7 +37,7 @@ export default function AddCertificate({ Certificates }) {
     const data = await res.json();
     console.log(data);
 
-    // router.push("/");
+    router.reload();
   };
   return (
     <div className={styles.container}>

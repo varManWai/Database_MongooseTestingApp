@@ -31,7 +31,7 @@ export default function Home({ Students }) {
     const data = await res.json();
     console.log(data);
 
-    // router.push("/");
+    router.reload();
   };
   return (
     <div className={styles.container}>
